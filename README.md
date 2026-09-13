@@ -9,32 +9,6 @@ A Typst resume template built around three layers:
 
 The [`example`](example) directory is a copyable starting point.
 
-## Keep your profile private
-
-Keep personal profiles and tailored resumes in a separate private repository
-checked out at `private/`. That directory is deliberately ignored by this
-public template repository, so it is never committed or shipped to people who
-clone the template.
-
-```text
-resume-template/
-  template.typ
-  example/
-  private/              # separate private Git repository
-    profile.json
-    software.typ
-```
-
-The private entrypoint can import the public template with a relative path:
-
-```typst
-#import "../template.typ": resume
-```
-
-Clone the private overlay into `private/` after cloning the public template.
-It is intentionally not a Git submodule: the public template and your private
-resume history can be committed and updated independently.
-
 ## Create a resume
 
 Load one profile and use the renderers that match the shapes you want to show:
