@@ -1,0 +1,5 @@
+# Generated resume output
+*.pdf
+
+# Personal data lives in an ignored, separately versioned overlay.
+/private/
