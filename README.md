@@ -14,24 +14,32 @@ The [`example`](example) directory is a copyable starting point.
 Load one profile and use the renderers that match the shapes you want to show:
 
 ```typst
-#import "../template.typ": resume
+#import "../template.typ" as resume
 
 #let data = json("profile.json")
-#let r = resume(data)
-#show: r.setup
+#show: resume.setup
 
-#r.header
-#(r.groups)(data.sections.at("skills"))
-#(r.entries)(data.sections.at("work"), ids: ("acme", "previous-role"))
-#(r.entries)(data.sections.at("education"))
+#resume.header(data.header)
+#resume.groups(data.sections.at("skills"))
+#resume.entries(data.sections.at("work"), ids: ("acme", "previous-role"))
+#resume.entries(data.sections.at("education"))
 ```
 
 Omit a renderer call to omit the section. Move calls to change section order.
 `ids` is optional: without it, every entry in the JSON object's declared order
 is rendered. With it, the tuple controls both selection and display order.
 
-Typst stores functions in dictionaries, which is why reusable renderers use the
-`#(r.entries)(...)` call syntax. `#r.header` remains plain content.
+The template is a normal Typst module: `setup`, `header`, `entries`, and
+`groups` are named functions. To customize its theme, pass the same theme
+dictionary to the renderers that use it:
+
+```typst
+#let theme = ("accent-color": "#26428b")
+#show: resume.setup.with(theme: theme)
+
+#resume.header(data.header, theme: theme)
+#resume.entries(data.sections.at("work"), theme: theme)
+```
 
 If compiling from the command line, invoke Typst from the repository root:
 

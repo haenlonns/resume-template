@@ -1,12 +1,11 @@
-#import "../template.typ": resume
+#import "../template.typ" as resume
 
 #let data = json("./example.json")
-#let r = resume(data)
-#show: r.setup
+#show: resume.setup
 
-#r.header
-#(r.groups)(data.sections.at("skills"))
-#(r.entries)(data.sections.at("work"))
-#(r.entries)(data.sections.at("projects"))
-#(r.entries)(data.sections.at("leadership"))
-#(r.entries)(data.sections.at("education"))
+#resume.header(data.header)
+#resume.groups(data.sections.at("skills"))
+#resume.entries(data.sections.at("work"))
+#resume.entries(data.sections.at("projects"))
+#resume.entries(data.sections.at("leadership"))
+#resume.entries(data.sections.at("education"))
